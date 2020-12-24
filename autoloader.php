@@ -5,8 +5,8 @@ function readPath($path)
     $filesMap = [];
     $filesMap[$path] = $path;
 
-    if (is_dir($path)) {'
-    '
+    if (is_dir($path)) {
+    
         $files = scandir($path);
 
         foreach ($files as $file) {
@@ -17,8 +17,8 @@ function readPath($path)
             $actualPath = $path . DIRECTORY_SEPARATOR . $file;
             $filesMap[$actualPath] = $actualPath;
 
-            if (is_dir($actualPath)) {'
-            '
+            if (is_dir($actualPath)) {
+            
                 $tmp = readPath($actualPath);
                 $filesMap = $filesMap + $tmp;
             }
@@ -38,7 +38,7 @@ spl_autoload_register(function($className){
         $fileExtension = (pathinfo($file))['extension'];
         $fileName = (pathinfo($file))['filename'];
 
-        if( ($fileExtension === 'php')&& ($fileName === $className) ){
+        if( ($fileExtension === 'php') && ($fileName === $className) ){
             require_once $file;
         }
 
