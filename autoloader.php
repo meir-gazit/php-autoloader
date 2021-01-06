@@ -10,7 +10,7 @@ function readPath($path)
         $files = scandir($path);
 
         foreach ($files as $file) {
-            if ($file === '.' || $file === '..' || $file === 'autoloader.php') {
+            if ( $file === '.' || $file === '..' || $file === 'autoloader.php' || $file === 'XXXX.sublime-project' || $file === 'XXXX.sublime-workspace' ) {
                 continue;
             }
 
@@ -34,13 +34,13 @@ spl_autoload_register(function($className){
     $files = readPath($path);
 
     foreach ($files as $file) {
+        if(!empty((pathinfo($file))['extension'])) {
+            $fileExtension = (pathinfo($file))['extension'];
+            $fileName = (pathinfo($file))['filename'];
 
-        $fileExtension = (pathinfo($file))['extension'];
-        $fileName = (pathinfo($file))['filename'];
-
-        if( ($fileExtension === 'php') && ($fileName === $className) ){
-            require_once $file;
+            if( ($fileExtension === 'php') && ($fileName === $className) ){
+                require_once $file;
+            }
         }
-
     }
 });
